@@ -1,0 +1,21 @@
+name: standard ci
+
+# // Triggered
+on: push
+
+jobs:
+  build-test:
+    name: Build test and deploy
+    runs-on: ubuntu-latest
+    steps:
+      [
+        { name: Checkout latest code, uses: actions/checkout@v4 },
+        {
+          name: Set up Node.js,
+          uses: actions/setup-node@v4,
+          with: { "node-version": "18" },
+        },
+        { name: Run build, run: npm run build },
+        { name: Run tests, run: npm run test },
+        { name : run Deploy 1, run: npm run deploy },
+      ]
